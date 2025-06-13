@@ -1,0 +1,4 @@
+MONGODB_HOST: mongodb.deeps.sbs
+# CATALOGUE_HOST: catalogue.deeps.sbs
+# USER_HOST: user.deeps.sbs
+# CART_HOST: cart.deeps.sbs
