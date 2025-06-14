@@ -3,8 +3,6 @@
     name: "{{ SQL_USERNAME }}"
     host: localhost
     password: "{{ SQL_PASSWORD }}"
-    login_user: "{{ SQL_USERNAME }}"
-    login_password: "{{ SQL_PASSWORD }}"
     login_unix_socket: /var/lib/mysql/mysql.sock
     check_implicit_admin: true
     state: present
