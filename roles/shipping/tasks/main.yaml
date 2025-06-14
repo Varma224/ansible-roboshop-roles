@@ -8,18 +8,15 @@
     name: common
     tasks_from: maven-setup
 
-- name: import data
-  community.mysql.mysql_db:
-    name: all
-    login_user: "{{ MYSQL_ROOT_USER }}"
-    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
-    login_host: "{{ MYSQL_HOST }}"
-    state: import
-    target: "{{ item }}"
+- name: Import SQL files from shipping to MySQL server
+  ansible.builtin.shell: >
+    mysql -h {{ MYSQL_HOST }} -u{{ MYSQL_ROOT_USER }} -p{{ MYSQL_ROOT_PASSWORD }} < {{ item }}
+  args:
+    chdir: /app/db
   loop:
-    - /app/db/schema.sql
-    - /app/db/app-user.sql
-    - /app/db/master-data.sql
+    - schema.sql
+    - app-user.sql
+    - master-data.sql
 
 - name: Systemd setup
   include_role:
