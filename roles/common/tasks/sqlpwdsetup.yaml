@@ -8,6 +8,17 @@
     state: present
     plugin: mysql_native_password
 
+- name: Ensure root user has remote access and password
+  community.mysql.mysql_user:
+    name: root
+    host: "%"
+    password: "RoboShop@1"
+    priv: "*.*:ALL,GRANT"
+    plugin: mysql_native_password
+    state: present
+    login_user: root
+    login_password: "RoboShop@1"
+
 - name: Allow root user access from any host (%)
   community.mysql.mysql_user:
     name: "{{ SQL_USERNAME }}"
