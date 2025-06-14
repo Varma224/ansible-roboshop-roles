@@ -8,27 +8,29 @@
     name: common
     tasks_from: maven
 
-- name: Copy DB files to MySQL server
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/tmp/"
+- name: Copy DB files from shipping to mysql
+  ansible.builtin.fetch:
+    src: /app/db/{{ item }}
+    dest: /tmp/
+    flat: yes
   loop:
-    - /app/db/schema.sql
-    - /app/db/app-user.sql
-    - /app/db/master-data.sql
-  delegate_to: mysql.deeps.sbs
+    - schema.sql
+    - app-user.sql
+    - master-data.sql
+  delegate_to: shipping.deeps.sbs
 
-- name: Import DB files directly on MySQL server
+- name: Import DB into MySQL
   community.mysql.mysql_db:
-    name: "{{ item.name }}"
+    name: all
     state: import
-    target: "/tmp/{{ item.file }}"
     login_user: "{{ MYSQL_ROOT_USER }}"
     login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+    login_host: "{{ MYSQL_HOST }}"
+    target: "/tmp/{{ item }}"
   loop:
-    - { name: shipping, file: schema.sql }
-    - { name: shipping, file: app-user.sql }
-    - { name: shipping, file: master-data.sql }
+    - schema.sql
+    - app-user.sql
+    - master-data.sql
   delegate_to: mysql.deeps.sbs
 
 - name: Systemd setup
