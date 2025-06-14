@@ -6,6 +6,7 @@
     login_unix_socket: /var/lib/mysql/mysql.sock
     check_implicit_admin: true
     state: present
+    plugin: mysql_native_password
 
 - name: Allow root user access from any host
   community.mysql.mysql_user:
