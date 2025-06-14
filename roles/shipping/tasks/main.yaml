@@ -8,6 +8,14 @@
     name: common
     tasks_from: maven
 
+- name: Ensure shipping database exists
+  community.mysql.mysql_db:
+    name: shipping
+    state: present
+    login_user: "{{ MYSQL_ROOT_USER }}"
+    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+    login_host: "{{ MYSQL_HOST }}"
+
 - name: import data
   community.mysql.mysql_db:
     name: all
