@@ -1,18 +1,31 @@
-- name: Add MySQL repo
+- name: Add MySQL 8.0 Yum Repository
   ansible.builtin.yum:
     name: https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
     state: present
+  register: mysql_repo
 
-- name: Installing mysql server
+- name: Enable MySQL 8.0 module (in case needed)
+  ansible.builtin.command: dnf module enable mysql:8.0 -y
+  when: ansible_distribution_major_version is version('8', '>=')
+  ignore_errors: yes # Allow skip for EL7
+
+- name: Install MySQL Server
   ansible.builtin.dnf:
     name: mysql-server
     state: present
+    update_cache: yes
 
-- name: Starting and enabling mysql service
+- name: Start and Enable MySQL Service
   ansible.builtin.service:
     name: mysqld
     state: started
     enabled: yes
+
+- name: Wait for MySQL to be available on socket
+  ansible.builtin.wait_for:
+    path: /var/lib/mysql/mysql.sock
+    state: started
+    timeout: 30
 
 - name: Set MySQL root password (first-time setup)
   community.mysql.mysql_user:
