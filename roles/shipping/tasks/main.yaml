@@ -1,12 +1,12 @@
 - name: App setup
   include_role:
     name: common
-    tasks_from: app-setup
+    tasks_from: app-setup.yaml
 
 - name: Maven setup
   include_role:
     name: common
-    tasks_from: maven
+    tasks_from: maven.yaml
 
 - name: import data
   community.mysql.mysql_db:
