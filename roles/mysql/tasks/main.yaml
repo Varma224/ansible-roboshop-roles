@@ -3,18 +3,11 @@
     name: mysql-server
     state: present
 
-- name: Install PyMySQL for Ansible MySQL modules
-  ansible.builtin.pip:
-    name: PyMySQL
-    executable: pip3
-
 - name: Starting and enabling mysql service
   ansible.builtin.service:
     name: mysqld
     state: started
     enabled: yes
 
-- name: Mysql pwdsetup and access to shipping service
-  include_role:
-    name: common
-    tasks_from: sqlpwdsetup.yaml
+- name: setp root password
+  ansible.builtin.command: mysql_secure_installation --set-root-pass RoboShop@1
