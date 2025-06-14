@@ -1,0 +1,20 @@
+- name: Set MySQL root password (first-time setup)
+  community.mysql.mysql_user:
+    name: "{{ SQL_USERNAME }}"
+    host: localhost
+    password: "{{ SQL_PASSWORD }}"
+    login_user: "{{ SQL_USERNAME }}"
+    login_password: "{{ SQL_PASSWORD }}"
+    login_unix_socket: /var/lib/mysql/mysql.sock
+    check_implicit_admin: true
+    state: present
+
+- name: Allow root user access from shipping host
+  community.mysql.mysql_user:
+    name: "{{ SQL_USERNAME }}"
+    host: "{{ SHIPPING_HOST }}"
+    password: "{{ SQL_PASSWORD }}"
+    priv: "*.*:ALL,GRANT"
+    state: present
+    login_user: "{{ SQL_USERNAME }}"
+    login_password: "{{ SQL_PASSWORD }}"
