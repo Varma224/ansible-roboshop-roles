@@ -1,3 +1,7 @@
+- name: DEBUG TEST - Is MySQL role running?
+  debug:
+    msg: "✅ MySQL role is executing."
+
 - name: Add MySQL 8.0 Yum Repository
   ansible.builtin.yum:
     name: https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
