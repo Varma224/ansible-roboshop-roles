@@ -9,7 +9,7 @@
     tasks_from: maven-setup
 
 - name: Import DB SQL files
-  ansible.builtin.command: >
+  ansible.builtin.shell: >
     mysql -h {{ MYSQL_HOST }} -u{{ MYSQL_ROOT_USER }} -p{{ MYSQL_ROOT_PASSWORD }} < /tmp/{{ item }}
   loop:
     - schema.sql
