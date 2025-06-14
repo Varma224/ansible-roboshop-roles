@@ -8,18 +8,29 @@
     name: common
     tasks_from: maven-setup
 
-- name: import data
+- name: Copy DB files to MySQL server
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/tmp/"
+  loop:
+    - files/schema.sql
+    - files/app-user.sql
+    - files/master-data.sql
+  delegate_to: mysql.deeps.sbs
+
+- name: Import DB files
   community.mysql.mysql_db:
     name: all
+    state: import
+    target: "/tmp/{{ item }}"
     login_user: "{{ MYSQL_ROOT_USER }}"
     login_password: "{{ MYSQL_ROOT_PASSWORD }}"
     login_host: "{{ MYSQL_HOST }}"
-    state: import
-    target: "{{ item }}"
   loop:
-    - /app/db/schema.sql
-    - /app/db/app-user.sql
-    - /app/db/master-data.sql
+    - schema.sql
+    - app-user.sql
+    - master-data.sql
+  delegate_to: mysql.deeps.sbs
 
 - name: Systemd setup
   include_role:
