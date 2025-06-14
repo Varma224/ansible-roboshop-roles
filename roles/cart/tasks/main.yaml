@@ -2,11 +2,11 @@
   include_role:
     name: common
     tasks_from: app-setup
-  
+
 - name: nodejs setup
   include_role:
     name: common
-    tasks_from: nodejs
+    tasks_from: nodejs-setup
 
 - name: systemd setup
   include_role:
