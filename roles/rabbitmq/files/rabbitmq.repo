@@ -5,7 +5,7 @@ enabled=1
 gpgcheck=0
 
 [modern-erlang-noarch]
-name=Erlang for RabbitMQ (noarch)
+name=Erlang for RabbitMQ
 baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/rpm/el/9/noarch
 enabled=1
 gpgcheck=0
@@ -17,7 +17,7 @@ enabled=1
 gpgcheck=0
 
 [rabbitmq-server-noarch]
-name=RabbitMQ Server (noarch)
+name=RabbitMQ Server
 baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/rpm/el/9/noarch
 enabled=1
 gpgcheck=0
