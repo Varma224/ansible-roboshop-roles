@@ -8,25 +8,9 @@
     name: common
     tasks_from: maven-setup
 
-- name: Copy DB files to MySQL server
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/tmp/"
-    remote_src: yes
-  loop:
-    - files/schema.sql
-    - files/app-user.sql
-    - files/master-data.sql
-  delegate_to: "{{ MYSQL_HOST }}"
-
-- name: Import DB files
-  community.mysql.mysql_db:
-    name: all
-    state: import
-    target: "/tmp/{{ item }}"
-    login_user: "{{ MYSQL_ROOT_USER }}"
-    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
-    login_host: "{{ MYSQL_HOST }}"
+- name: Import DB SQL files
+  ansible.builtin.command: >
+    mysql -h {{ MYSQL_HOST }} -u{{ MYSQL_ROOT_USER }} -p{{ MYSQL_ROOT_PASSWORD }} < /tmp/{{ item }}
   loop:
     - schema.sql
     - app-user.sql
