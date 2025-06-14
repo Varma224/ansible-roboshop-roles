@@ -1,0 +1,23 @@
+[modern-erlang]
+name=Erlang for RabbitMQ
+baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/rpm/el/9/$basearch
+enabled=1
+gpgcheck=0
+
+[modern-erlang-noarch]
+name=Erlang for RabbitMQ (noarch)
+baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/rpm/el/9/noarch
+enabled=1
+gpgcheck=0
+
+[rabbitmq-server]
+name=RabbitMQ Server
+baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/rpm/el/9/$basearch
+enabled=1
+gpgcheck=0
+
+[rabbitmq-server-noarch]
+name=RabbitMQ Server (noarch)
+baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/rpm/el/9/noarch
+enabled=1
+gpgcheck=0
