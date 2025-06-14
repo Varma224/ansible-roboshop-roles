@@ -2,3 +2,4 @@ CATALOGUE_HOST: catalogue.deeps.sbs
 USER_HOST: user.deeps.sbs
 CART_HOST: cart.deeps.sbs
 SHIPPING_HOST: shipping.deeps.sbs
+PAYMENT_HOST: payment.deeps.sbs
