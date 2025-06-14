@@ -8,30 +8,18 @@
     name: common
     tasks_from: maven
 
-- name: Copy DB files from shipping to mysql
-  ansible.builtin.fetch:
-    src: /app/db/{{ item }}
-    dest: /tmp/
-    flat: yes
-  loop:
-    - schema.sql
-    - app-user.sql
-    - master-data.sql
-  delegate_to: shipping.deeps.sbs
-
-- name: Import DB into MySQL
+- name: import data
   community.mysql.mysql_db:
     name: all
+    login_user: root
+    login_password: RoboShop@1
+    login_host: mysql.deeps.sbs
     state: import
-    login_user: "{{ MYSQL_ROOT_USER }}"
-    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
-    login_host: "{{ MYSQL_HOST }}"
-    target: "/tmp/{{ item }}"
+    target: "{{ item }}"
   loop:
-    - schema.sql
-    - app-user.sql
-    - master-data.sql
-  delegate_to: mysql.deeps.sbs
+    - /app/db/schema.sql
+    - /app/db/app-user.sql
+    - /app/db/master-data.sql
 
 - name: Systemd setup
   include_role:
