@@ -17,7 +17,7 @@
     - schema.sql
     - app-user.sql
     - master-data.sql
-  tags: [one_time_sql]
+  tags: one_time
 
 - name: Systemd setup
   include_role:
