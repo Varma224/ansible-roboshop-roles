@@ -28,6 +28,7 @@
     - /app/db/schema.sql
     - /app/db/app-user.sql
     - /app/db/master-data.sql
+  delegate_to: mysql.deeps.sbs
 
 - name: systemd setup
   include_role:
