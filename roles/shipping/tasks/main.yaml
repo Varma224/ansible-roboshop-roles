@@ -1,27 +1,37 @@
-- name: app setup
+- name: App setup
   include_role:
     name: common
     tasks_from: app-setup
 
-- name: maven setup
+- name: Maven setup
   include_role:
     name: common
     tasks_from: maven
 
-- name: import data
-  community.mysql.mysql_db:
-    name: all
-    login_user: "{{ MYSQL_ROOT_USER }}"
-    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
-    login_host: "{{ MYSQL_HOST }}"
-    state: import
-    target: "{{ item }}"
+- name: Copy DB files to MySQL server
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/tmp/"
   loop:
     - /app/db/schema.sql
     - /app/db/app-user.sql
     - /app/db/master-data.sql
+  delegate_to: mysql.deeps.sbs
 
-- name: systemd setup
+- name: Import DB files directly on MySQL server
+  community.mysql.mysql_db:
+    name: "{{ item.name }}"
+    state: import
+    target: "/tmp/{{ item.file }}"
+    login_user: "{{ MYSQL_ROOT_USER }}"
+    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+  loop:
+    - { name: shipping, file: schema.sql }
+    - { name: shipping, file: app-user.sql }
+    - { name: shipping, file: master-data.sql }
+  delegate_to: mysql.deeps.sbs
+
+- name: Systemd setup
   include_role:
     name: common
     tasks_from: systemd.yaml
