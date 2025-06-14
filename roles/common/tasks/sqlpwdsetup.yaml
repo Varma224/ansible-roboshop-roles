@@ -9,10 +9,10 @@
     check_implicit_admin: true
     state: present
 
-- name: Allow root user access from shipping host
+- name: Allow root user access from any host
   community.mysql.mysql_user:
     name: "{{ SQL_USERNAME }}"
-    host: "{{ SHIPPING_HOST }}"
+    host: "%"
     password: "{{ SQL_PASSWORD }}"
     priv: "*.*:ALL,GRANT"
     state: present
