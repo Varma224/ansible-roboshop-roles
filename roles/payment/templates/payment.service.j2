@@ -1,21 +1,21 @@
 [Unit]
 Description=Payment Service
-After=network.target
 
 [Service]
 User=roboshop
 WorkingDirectory=/app
 
-Environment=CART_HOST={{ CART_HOST }}
+Environment=CART_HOST=<CART-IP>
 Environment=CART_PORT=8080
-Environment=USER_HOST={{ USER_HOST }}
+Environment=USER_HOST=<USER-IP>
 Environment=USER_PORT=8080
-Environment=AMQP_HOST={{ RABBITMQ_HOST }}
-Environment=AMQP_USER={{ PAYMENT_USER }}
-Environment=AMQP_PASS={{ PAYMENT_PASSWORD }}
+Environment=AMQP_HOST=<RABBITMQ-IP>
+Environment=AMQP_USER=roboshop
+Environment=AMQP_PASS=roboshop123
 
-ExecStart=/usr/bin/node server.js
-Restart=always
+# Override internal user switching
+ExecStart=/usr/local/bin/uwsgi --ini payment.ini --disable-logging --need-app --uid roboshop --gid roboshop
+ExecStop=/bin/kill -9 $MAINPID
 SyslogIdentifier=payment
 
 [Install]
