@@ -22,23 +22,28 @@
   ansible.builtin.command: mongosh --host mongodb.deeps.sbs --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
   register: catalogue_output
   ignore_errors: true
+  ignore_unreachable: true
 
 - name: print catalogue output
   ansible.builtin.debug:
     msg: "{{ catalogue_output }}"
   ignore_errors: true
+  ignore_unreachable: true
 
 - name: Load product data
   ansible.builtin.shell: mongosh --host mongodb.deeps.sbs < /app/db/master-data.js
   when: catalogue_output.stdout | int < 0
   ignore_errors: true
+  ignore_unreachable: true
 
 - name: systemd setup
   include_role:
     name: common
     tasks_from: systemd
 
-- name: app setup
+- name: Deployment
+  tags:
+    - deployment
   include_role:
     name: common
     tasks_from: deployment
