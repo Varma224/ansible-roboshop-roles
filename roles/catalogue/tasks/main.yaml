@@ -40,8 +40,7 @@
   include_role:
     name: common
     tasks_from: systemd
-
-- name: Deployment
-  import_role:
-    name: common
-    tasks_from: deployment
+# - name: Deployment
+#   import_role:
+#     name: common
+#     tasks_from: deployment
