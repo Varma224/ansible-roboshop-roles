@@ -1,1 +1,1 @@
-MONGODB_HOST: mongodb.deeps.sbs
+MONGODB_HOST: "mongodb-{{ env }}.deeps.sbs"
