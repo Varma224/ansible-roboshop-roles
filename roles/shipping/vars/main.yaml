@@ -1,4 +1,4 @@
 MYSQL_ROOT_USER: root
 MYSQL_ROOT_PASSWORD: RoboShop@1
-MYSQL_HOST: mysql.deeps.sbs
-CART_HOST: cart.deeps.sbs
+MYSQL_HOST: mysql-{{ env }}.deeps.sbs
+CART_HOST: cart.backend-{{ env }}.deeps.sbs

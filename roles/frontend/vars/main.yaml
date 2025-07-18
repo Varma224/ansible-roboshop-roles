@@ -1,5 +1,5 @@
-CATALOGUE_HOST: catalogue.deeps.sbs
-USER_HOST: user.deeps.sbs
-CART_HOST: cart.deeps.sbs
-SHIPPING_HOST: shipping.deeps.sbs
-PAYMENT_HOST: payment.deeps.sbs
+CATALOGUE_HOST: catalogue.backend-{{ env }}.deeps.sbs
+USER_HOST: user.backend-{{ env }}.deeps.sbs
+CART_HOST: cart.backend-{{ env }}.deeps.sbs
+SHIPPING_HOST: shipping.backend-{{ env }}.deeps.sbs
+PAYMENT_HOST: payment.backend-{{ env }}.deeps.sbs

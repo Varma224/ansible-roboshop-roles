@@ -1,5 +1,5 @@
-CART_HOST: cart.deeps.sbs
-USER_HOST: user.deeps.sbs
-RABBITMQ_HOST: rabbitmq.deeps.sbs
+CART_HOST: cart.backend-{{ env }}.deeps.sbs
+USER_HOST: user.backend-{{ env }}.deeps.sbs
+RABBITMQ_HOST: rabbitmq-{{ env }}.deeps.sbs
 PAYMENT_USER: roboshop
 PAYMENT_PASSWORD: roboshop123

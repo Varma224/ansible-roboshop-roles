@@ -1,2 +1,2 @@
-REDIS_HOST: redis.deeps.sbs
-MONGODB_HOST: mongodb.deeps.sbs
+REDIS_HOST: redis-{{ env }}.deeps.sbs
+MONGODB_HOST: mongodb-{{ env }}.deeps.sbs
