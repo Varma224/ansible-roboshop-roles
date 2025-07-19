@@ -1,2 +1,2 @@
 REDIS_HOST: redis-{{ env }}.deeps.sbs
-CATALOGUE_HOST: catalogue.backend-{{ dev }}.deeps.sbs
+CATALOGUE_HOST: catalogue.backend-{{ env }}.deeps.sbs
